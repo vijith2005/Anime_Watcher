@@ -1,0 +1,16 @@
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);  /* semi-transparent */
+  backdrop-filter: blur(8px);       /* blur effect */
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
+}
+.footer-text {
+  margin: 0;
+  font-size: 14px;
+}

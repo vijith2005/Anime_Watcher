@@ -1,0 +1,70 @@
+/* src/styles/Auth.css */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("https://wallpapercave.com/wp/wp6599181.jpg") no-repeat center center/cover;
+  position: relative;
+}
+
+.auth-overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* dark overlay */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url('https://wallpapercave.com/wp/wp1944208.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Make navbar background transparent if you want image behind it */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.7); /* or remove if you want full transparent */
+  backdrop-filter: blur(5px);
+}
+
+/* Center login card */
+.login-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: center;
+}
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);  /* semi-transparent */
+  backdrop-filter: blur(8px);       /* blur effect */
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
+}
