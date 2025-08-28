@@ -113,6 +113,12 @@ export default function Login() {
             >
               Login
             </Button>
+             <Form.Group className="mb-3">
+            <i style={{ color: "#fff", textShadow: "1px 1px #000", fontSize: "12px" }}>
+              Don't have an account? <a href="/signup" style={{ color: "#ffdd57", textDecoration: "underline" }}>Sign Up</a>
+              </i>
+            </Form.Group>
+
           </Form>
         </div>
       </Container>
