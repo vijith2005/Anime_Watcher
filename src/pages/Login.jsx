@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     if (username.trim() && password.trim()) {
       localStorage.setItem("username", username);
-      navigate("/");
+      navigate("/home");
     } else {
       alert("Please enter both username and password!");
     }
