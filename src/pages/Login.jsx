@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const animeBg = "https://wallpapercave.com/wp/wp1944208.png";
 
@@ -11,33 +11,36 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (username.trim() && password.trim()) {
-      localStorage.setItem("username", username);
+
+    const savedUser = localStorage.getItem("signup-username");
+    const savedPass = localStorage.getItem("signup-password");
+
+    if (username === savedUser && password === savedPass) {
+      alert("Login successful!");
       navigate("/home");
     } else {
-      alert("Please enter both username and password!");
+      alert("Invalid credentials! Please sign up first.");
     }
   };
 
   return (
     <div
       style={{
-        // backgroundImage: `url(${animeBg})`,
-        backgroundSize: "auto",           
-        backgroundPosition: "top left",   
-        backgroundRepeat: "repeat",       
-        backgroundAttachment: "scroll",   
+        backgroundImage: `url(${animeBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         minHeight: "100vh",
         width: "100%",
+        margin: 0,
+        padding: 0,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontFamily: "'Comic Sans MS', cursive, sans-serif",
       }}
     >
       <Container
         className="d-flex justify-content-center align-items-center"
-        style={{ minHeight: "100vh", width: "100%", padding: 0 }}
+        style={{ minHeight: "100vh", width: "100%", margin: 0, padding: 0 }}
       >
         <div
           style={{
@@ -113,12 +116,24 @@ export default function Login() {
             >
               Login
             </Button>
-             <Form.Group className="mb-3">
-            <i style={{ color: "#fff", textShadow: "1px 1px #000", fontSize: "12px" }}>
-              Don't have an account? <a href="/signup" style={{ color: "#ffdd57", textDecoration: "underline" }}>Sign Up</a>
+
+            <Form.Group className="mt-3 text-center">
+              <i
+                style={{
+                  color: "#fff",
+                  textShadow: "1px 1px #000",
+                  fontSize: "12px",
+                }}
+              >
+                Don’t have an account?{" "}
+                <Link
+                  to="/signup"
+                  style={{ color: "#ffdd57", textDecoration: "underline" }}
+                >
+                  Sign Up
+                </Link>
               </i>
             </Form.Group>
-
           </Form>
         </div>
       </Container>

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import AnimeDetails from "./pages/AnimeDetails";
@@ -8,22 +8,27 @@ import Footer from "./components/Footer";
 import Trending from "./pages/Trending";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+
 function App() {
+  const location = useLocation();
+  const hideNavbar = location.pathname === "/" || location.pathname === "/signup";
+
   return (
     <>
-      <Navbar />
+      {!hideNavbar && <Navbar />}
+
       <div className="container mt-4">
         <Routes>
-
-          <Route path="/home" element={<Home />} />
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/anime/:id" element={<AnimeDetails />} />
           <Route path="/watch/:id/:ep" element={<WatchEpisode />} />
-            <Route path="/watch/trending" element={<Trending />} />
+          <Route path="/watch/trending" element={<Trending />} />
         </Routes>
       </div>
+
       {/* <Footer /> */}
     </>
   );
