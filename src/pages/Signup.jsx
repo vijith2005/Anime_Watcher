@@ -13,12 +13,23 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Save details to localStorage
-    const userData = { username, email, password };
-    localStorage.setItem("user", JSON.stringify(userData));
+    // Get existing users or empty array
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    alert("Signup successful! Data stored in localStorage.");
-    navigate("/"); // redirect to login page after signup
+    // Check if email already registered
+    const userExists = existingUsers.find((user) => user.email === email);
+    if (userExists) {
+      alert("Email already registered. Please login instead.");
+      return;
+    }
+
+    // Save new user
+    const newUser = { username, email, password };
+    existingUsers.push(newUser);
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+
+    alert("Signup successful! Please login.");
+    navigate("/"); // redirect to login page
   };
 
   return (
