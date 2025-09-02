@@ -4,6 +4,7 @@ import { Form, Button, Card } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Auth.css";
 
+
 export default function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
