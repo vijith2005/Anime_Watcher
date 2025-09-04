@@ -5,18 +5,27 @@ import { useNavigate, Link } from "react-router-dom";
 const animeBg = "https://wallpapercave.com/wp/wp1944208.png";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const savedUser = localStorage.getItem("signup-username");
-    const savedPass = localStorage.getItem("signup-password");
+    // Get users from localStorage
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    if (username === savedUser && password === savedPass) {
-      alert("Login successful!");
+    // Find user (login works with username OR email)
+    const validUser = existingUsers.find(
+      (user) =>
+        (user.username === usernameOrEmail || user.email === usernameOrEmail) &&
+        user.password === password
+    );
+
+    if (validUser) {
+      alert(`Welcome back, ${validUser.username}!`);
+      // Store active user info if needed
+      localStorage.setItem("activeUser", JSON.stringify(validUser));
       navigate("/home");
     } else {
       alert("Invalid credentials! Please sign up first.");
@@ -64,13 +73,13 @@ export default function Login() {
           <Form onSubmit={handleLogin}>
             <Form.Group className="mb-3">
               <Form.Label style={{ color: "#fff", textShadow: "1px 1px #000" }}>
-                Username
+                Username or Email
               </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username or email"
+                value={usernameOrEmail}
+                onChange={(e) => setUsernameOrEmail(e.target.value)}
                 required
                 style={{
                   borderRadius: "10px",

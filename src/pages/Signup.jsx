@@ -1,9 +1,8 @@
-// src/pages/Signup.jsx
 import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import "../styles/Auth.css";
+import { Form, Button, Container } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
 
+const animeBg = "https://wallpapercave.com/wp/wp1944208.png";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -11,75 +10,163 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
 
     // Get existing users or empty array
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Check if email already registered
-    const userExists = existingUsers.find((user) => user.email === email);
+    // Check if user already exists by email or username
+    const userExists = existingUsers.some(
+      (user) => user.email === email || user.username === username
+    );
+
     if (userExists) {
-      alert("Email already registered. Please login instead.");
-      return;
+      alert("User already exists! Please login.");
+    } else {
+      const newUser = { username, email, password };
+      existingUsers.push(newUser);
+
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+
+      alert("Signup successful! You can now login.");
+      navigate("/login");
     }
-
-    // Save new user
-    const newUser = { username, email, password };
-    existingUsers.push(newUser);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
-
-    alert("Signup successful! Please login.");
-    navigate("/"); // redirect to login page
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-overlay"></div>
-      <Card className="auth-card">
-        <h3 className="text-center mb-4">Sign Up</h3>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </Form.Group>
+    <div
+      style={{
+        backgroundImage: `url(${animeBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        width: "100%",
+        margin: 0,
+        padding: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Container
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: "100vh", width: "100%", margin: 0, padding: 0 }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "400px",
+            borderRadius: "20px",
+            background: "rgba(255, 255, 255, 0.15)",
+            boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            border: "1px solid rgba(255, 255, 255, 0.3)",
+            padding: "30px",
+          }}
+        >
+          <h2
+            className="text-center mb-4"
+            style={{ color: "#fff", textShadow: "2px 2px #000" }}
+          >
+            Anime Signup
+          </h2>
+          <Form onSubmit={handleSignup}>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "#fff", textShadow: "1px 1px #000" }}>
+                Username
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                style={{
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.5)",
+                  background: "rgba(255,255,255,0.2)",
+                  color: "#fff",
+                }}
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "#fff", textShadow: "1px 1px #000" }}>
+                Email
+              </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                style={{
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.5)",
+                  background: "rgba(255,255,255,0.2)",
+                  color: "#fff",
+                }}
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label style={{ color: "#fff", textShadow: "1px 1px #000" }}>
+                Password
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.5)",
+                  background: "rgba(255,255,255,0.2)",
+                  color: "#fff",
+                }}
+              />
+            </Form.Group>
 
-          <Button variant="success" type="submit" className="w-100">
-            Sign Up
-          </Button>
-        </Form>
-        <p className="mt-3 text-center">
-          Already have an account? <Link to="/">Login</Link>
-        </p>
-      </Card>
+            <Button
+              type="submit"
+              className="w-100"
+              style={{
+                background: "rgba(255,255,255,0.3)",
+                color: "#fff",
+                border: "none",
+                borderRadius: "15px",
+                fontWeight: "bold",
+                backdropFilter: "blur(5px)",
+                WebkitBackdropFilter: "blur(5px)",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+              }}
+            >
+              Sign Up
+            </Button>
+
+            <Form.Group className="mt-3 text-center">
+              <i
+                style={{
+                  color: "#fff",
+                  textShadow: "1px 1px #000",
+                  fontSize: "12px",
+                }}
+              >
+                Already have an account?{" "}
+                <Link
+                  to="/"
+                  style={{ color: "#ffdd57", textDecoration: "underline" }}
+                >
+                  Login
+                </Link>
+              </i>
+            </Form.Group>
+          </Form>
+        </div>
+      </Container>
     </div>
   );
 }
