@@ -7,10 +7,19 @@ export default function Home() {
   const [animeList, setAnimeList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
+  const activeUser = JSON.parse(localStorage.getItem("activeUser"));
 
   useEffect(() => {
+    // ✅ Retrieve username from localStorage
+    const storedUsername = localStorage.getItem("currentUsername");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+
+    // Fetch anime list
     getTopAnime()
-      .then(data => {
+      .then((data) => {
         setAnimeList(data);
         setLoading(false);
       })
@@ -19,15 +28,18 @@ export default function Home() {
         setLoading(false);
       });
   }, []);
+    
 
-  if (loading) return <Spinner animation="border" className="d-block mx-auto mt-5" />;
+  if (loading)
+    return <Spinner animation="border" className="d-block mx-auto mt-5" />;
   if (error) return <Alert variant="danger">{error}</Alert>;
 
   return (
     <div>
+      <h2>Hello {activeUser?.username || "Guest"} 👋</h2>
       <h2 className="mb-4">Top Anime</h2>
       <Row>
-        {animeList.map(anime => (
+        {animeList.map((anime) => (
           <Col key={anime.mal_id} sm={6} md={4} lg={3}>
             <AnimeCard anime={anime} />
           </Col>
