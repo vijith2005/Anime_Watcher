@@ -30,7 +30,7 @@ export default function Signup() {
       localStorage.setItem("users", JSON.stringify(existingUsers));
 
       alert("Signup successful! You can now login.");
-      navigate("/login");
+      navigate("/");
     }
   };
 

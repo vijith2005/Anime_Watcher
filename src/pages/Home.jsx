@@ -17,7 +17,7 @@ export default function Home() {
       setUsername(storedUsername);
     }
 
-    // Fetch anime list
+    
     getTopAnime()
       .then((data) => {
         setAnimeList(data);
