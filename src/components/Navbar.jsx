@@ -8,24 +8,24 @@ export default function NavBar() {
   const navigate = useNavigate();
   const location = useLocation(); 
 
-  useEffect(() => {
-    console.log("Current path:", location.pathname); 
-  }, [location]);
+  // useEffect(() => {
+  //   console.log("Current path:", location.pathname); 
+  // }, [location]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) navigate(`/search?q=${query}`);
   };
 
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-    document.body.style.background = darkMode
-      ? "linear-gradient(135deg, #ffe6f7, #d9faff)" 
-      : "linear-gradient(135deg, #1a1a2e, #16213e)"; 
-  };
+  // const toggleTheme = () => {
+  //   setDarkMode(!darkMode);
+  //   document.body.style.background = darkMode
+  //     ? "linear-gradient(135deg, #ffe6f7, #d9faff)" 
+  //     : "linear-gradient(135deg, #1a1a2e, #16213e)"; 
+  // };
 
   
-  const hideToggle = ["/login"];  
+  const hideToggle = ["/"];  
 
   return (
     <Navbar
@@ -37,7 +37,7 @@ export default function NavBar() {
           : "rgba(255, 255, 255, 0.8)",
         transition: "0.4s ease",
       }}
-      variant={darkMode ? "dark" : "light"}
+      // variant={darkMode ? "dark" : "light"}
     >
       <Container fluid>
         <Navbar.Brand as={Link} to="/">🌸 AnimeWatcher</Navbar.Brand>
@@ -64,7 +64,7 @@ export default function NavBar() {
           </Form>
 
         
-          {!hideToggle.includes(location.pathname) && (
+          {/* {!hideToggle.includes(location.pathname) && (
             <Button
               onClick={toggleTheme}
               style={{
@@ -76,7 +76,7 @@ export default function NavBar() {
             >
               {darkMode ? "🌙" : "☀️"}
             </Button>
-          )}
+          )} */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
